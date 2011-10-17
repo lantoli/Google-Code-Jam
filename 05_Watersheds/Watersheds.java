@@ -97,7 +97,7 @@ public class Watersheds {
 						if ((map[i][j+1] < min)) {  ii=i; jj=j+1; min = map[ii][jj]; } // East
 						if ((map[i+1][j] < min)) {  ii=i+1; jj=j; min = map[ii][jj]; } // South
 		
-						if (min != value && (sinks[i][j] != 0 || sinks[ii][jj] != 0)) {
+						if (min != value) {
 							if (sinks[i][j] == 0 && sinks[ii][jj] != 0 ) {
 								sinks[i][j] = sinks[ii][jj];
 								lettersToUpdate--;
