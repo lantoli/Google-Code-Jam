@@ -34,33 +34,25 @@ public class WelcomeToCodeJam {
 	}
 
 	
-//	final static String welcome = "12";
 	final static String welcome = "welcome to code jam";
 	final static int welcomeLen = welcome.length();
 	
 	private static long welcome(String sentence) {
 		int sentenceLen = sentence.length();
-		long[][] table = new long[sentenceLen][welcomeLen];
+		long[] table = new long[welcomeLen];
 		for (int i=0; i<sentenceLen; i++) {
 			for (int j=0; j<welcomeLen; j++) {
-				if (i>0) {
-					table[i][j] = table[i-1][j];										
-				} 
 				if (sentence.charAt(i) == welcome.charAt(j)) {
-					if (j>0 && i>0) {
-						table[i][j] += table[i-1][j-1];
+					if (j>0) {
+						table[j] += table[j-1];
 					} else {
-						if (j==0) {
-							table[i][j] += 1;
-						}
+						table[j]++;
 					}
-					table[i][j] %= 10000;
+					table[j] %= 10000;
 				}
 			}
 		}
-		return table[sentenceLen-1][welcomeLen-1];
+		return table[welcomeLen-1];
 	}
-		
-	
 	
 }
