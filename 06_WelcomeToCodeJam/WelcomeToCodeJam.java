@@ -8,7 +8,8 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * This implementation is based on solution by contestant liszt1990
+ * This implementation is based on solution by contestant liszt1990 and
+ * https://github.com/alvarogonzalezsotillo/GoogleCodeJam/tree/master/Practice%20-%20resueltos/Welcome
  */
 public class WelcomeToCodeJam {
 
