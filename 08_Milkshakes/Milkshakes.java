@@ -60,20 +60,19 @@ public class Milkshakes {
 		boolean possible = true;
 		boolean found;
 	
-		do	{
+		do {
 			found = false;
-			for (int j = 0; j < numCustomer; j++) 			{
-				if (numCanUse[j] == 0 && !visited[j]) 				{
+			for (int j = 0; j < numCustomer; j++) {
+				if (numCanUse[j] == 0 && !visited[j]) {
 					visited[j] = true;
 					found = true;
-					if (malted[j] == -1) 					{
+					if (malted[j] == -1) {
 						possible = false;
 						break;
 					} else {
 						choice[malted[j]] = true;
 						for (int k = 0; k < numCustomer; k++) {
-							if (canUse[k][malted[j]] == true)
-							{
+							if (canUse[k][malted[j]] == true) {
 								numCanUse[k]--;
 								canUse[k][malted[j]] = false;
 							}
