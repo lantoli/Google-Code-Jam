@@ -72,7 +72,7 @@ public class Milkshakes {
 					} else {
 						choice[malted[j]] = true;
 						for (int k = 0; k < numCustomer; k++) {
-							if (canUse[k][malted[j]] == true) {
+							if (canUse[k][malted[j]]) {
 								numCanUse[k]--;
 								canUse[k][malted[j]] = false;
 							}
