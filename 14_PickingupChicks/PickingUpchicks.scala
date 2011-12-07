@@ -20,7 +20,7 @@ class PickingupChicks extends CodeJam {
     //def filename = "B-small-practice"
     def filename = "B-large-practice"
   	  
-    def doit : String = {
+    def doit = {
       var nChicks = readInt
       var kAtLeastChicks  = readInt
       var bBarn = readInt
