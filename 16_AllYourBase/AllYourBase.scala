@@ -11,7 +11,6 @@ object AllYourBase  {
   def main(args: Array[String]): Unit = {
 		new AllYourBase().doall();
   }
-
 }
 
 class AllYourBase extends CodeJam {
