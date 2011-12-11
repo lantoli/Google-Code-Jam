@@ -1,0 +1,59 @@
+This is Leo Antoli's solution to challenge in: http://code.google.com/codejam/contest/dashboard?c=189252#s=p1
+
+Solution provided in:
+
+Scala
+
+Problem
+
+You are studying a swarm of N fireflies. Each firefly is moving in a straight line at a constant speed. You are standing at the center of the universe, at position (0, 0, 0). Each firefly has the same mass, and you want to know how close the center of the swarm will get to your location (the origin).
+
+You know the position and velocity of each firefly at t = 0, and are only interested in t ≥ 0. The fireflies have constant velocity, and may pass freely through all of space, including each other and you. Let M(t) be the location of the center of mass of the N fireflies at time t. Let d(t) be the distance between your position and M(t) at time t. Find the minimum value of d(t), dmin, and the earliest time when d(t) = dmin, tmin.
+
+Input
+
+The first line of input contains a single integer T, the number of test cases. Each test case starts with a line that contains an integer N, the number of fireflies, followed by N lines of the form
+
+x y z vx vy vz
+Each of these lines describes one firefly: (x, y, z) is its initial position at time t = 0, and (vx, vy, vz) is its velocity.
+Output
+
+For each test case, output
+
+Case #X: dmin tmin
+where X is the test case number, starting from 1. Any answer with absolute or relative error of at most 10-5 will be accepted.
+Limits
+
+All the numbers in the input will be integers.
+1 ≤ T ≤ 100
+The values of x, y, z, vx, vy and vz will be between -5000 and 5000, inclusive.
+
+Small dataset
+
+3 ≤ N ≤ 10
+Large dataset
+
+3 ≤ N ≤ 500
+Sample
+
+
+Input  
+3
+3
+3 0 -4 0 0 3
+-3 -2 -1 3 0 0
+-3 -1 2 0 3 0
+3
+-5 0 0 1 0 0
+-7 0 0 1 0 0
+-6 3 0 1 0 0
+4
+1 2 3 1 2 3
+3 2 1 3 2 1
+1 0 0 0 0 -1
+0 10 0 0 -10 -1
+ 	
+Output 
+Case #1: 0.00000000 1.00000000
+Case #2: 1.00000000 6.00000000
+Case #3: 3.36340601 1.00000000
