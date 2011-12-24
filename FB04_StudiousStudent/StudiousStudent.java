@@ -3,6 +3,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Scanner;
 
 
@@ -21,7 +22,15 @@ public class StudiousStudent {
 	    	in.nextInt();
 	    	String[] str = in.nextLine().split(" ");
 	    	
-	    	Arrays.sort(str);
+	    	Comparator<String> comparator = new Comparator<String>() {
+				@Override
+				public int compare(String a, String b) {
+					return (a+b).compareTo(b+a);
+				}
+	    		
+	    	};
+	    	
+	    	Arrays.sort(str, comparator);
 	    	for (String s: str) {
 	    		System.out.print(s);		    
 	    	}
@@ -30,5 +39,5 @@ public class StudiousStudent {
 	    }
 	    
 	}
-
+	
 }
