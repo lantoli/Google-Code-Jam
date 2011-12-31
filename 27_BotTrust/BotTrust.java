@@ -1,12 +1,12 @@
 package lantoli.codejam;
+import static java.lang.Math.abs;
+import static java.lang.Math.min;
+import static java.lang.Math.max;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
-import java.text.CharacterIterator;
-import java.text.StringCharacterIterator;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 
@@ -26,29 +26,20 @@ public class BotTrust {
 	    	int timeOrange = 0, timeBlue = 0;
 	    	int n = in.nextInt();
 	    	for (int i=0; i<n; i++) {
-	    		boolean orange = "O".equals(in.next());
-	    		int button = in.nextInt();
-	    		
-	    		int steps;
-	    		if (orange) {
-	 	    		steps = Math.abs(button-posOrange) + 1;
-	 	    		posOrange = button;
-	 	    		timeOrange += steps;
-		    		time += steps;
-	 	    		int substract = Math.min(timeOrange-1, timeBlue);
-	 	    		time -= substract;
-	 	    		timeOrange -= substract;
+	    		if ("O".equals(in.next())) {
+	    	 		int button = in.nextInt();
+	        		int add =  max(1 - timeOrange, abs(button-posOrange) + 1 - timeBlue);
+	 	    		timeOrange += add;
+		    		time += add;
 	 	    		timeBlue = 0;
-
+	 	    		posOrange = button;
 	    		} else {
-	 	    		steps = Math.abs(button-posBlue) + 1;    			
+	    	 		int button = in.nextInt();
+	        		int add =  max(1 - timeBlue, abs(button-posBlue) + 1 - timeOrange);
+	 	    		timeBlue += add;
+		    		time += add;
+		    		timeOrange = 0;
 	 	    		posBlue = button;
-	 	    		timeBlue += steps;
-		    		time += steps;
-	 	    		int substract = Math.min(timeBlue-1, timeOrange);
-	 	    		time -= substract;
-	 	   			timeBlue -= substract;
-	 	    		timeOrange = 0;
 	    		}   	
 	    	}
 	    	System.out.println(String.format("Case #%d: %d", test, time));
