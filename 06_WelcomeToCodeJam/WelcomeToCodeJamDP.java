@@ -22,9 +22,10 @@ public class WelcomeToCodeJamDP  {
 			int strLen = str.length();
 
 			long[][] dp = new long[strLen+1][welcomeLen+1];
-			dp[0][0] = 1;
+			for (int i=0; i <= strLen; i++) {
+				dp[i][0] = 1;
+			}
 			for (int i=1; i <= strLen; i++) {
-				dp[i][0] = dp[i-1][0];
 				for (int j=1; j <= welcomeLen; j++){
 					dp[i][j] = dp[i-1][j];
 					if (str.charAt(i-1) == welcome.charAt(j-1)) {
