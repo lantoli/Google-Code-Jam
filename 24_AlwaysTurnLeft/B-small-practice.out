@@ -1,0 +1,580 @@
+Case #1:
+ac5
+386
+9c7
+e43
+9c5
+Case #2:
+3
+Case #3:
+6a5
+9f6
+a51
+9e4
+872
+2b5
+9d4
+Case #4:
+8e796
+a7323
+119d5
+Case #5:
+c7
+a5
+b4
+b4
+32
+97
+87
+a7
+11
+Case #6:
+6ac6aecfe6ae6
+9d49594119511
+Case #7:
+a48e4a5
+de4b632
+8fc5bf7
+858c511
+Case #8:
+3
+3
+b
+3
+3
+1
+Case #9:
+7
+3
+3
+3
+3
+3
+3
+1
+Case #10:
+a487
+b4a5
+9cf6
+2871
+9c72
+6ad5
+bde6
+9411
+Case #11:
+86ad68e
+8dd49c5
+Case #12:
+8ec7
+8787
+858d
+Case #13:
+3
+3
+3
+3
+3
+3
+3
+3
+3
+3
+b
+3
+3
+1
+Case #14:
+63
+95
+Case #15:
+8e6b
+a5b5
+9494
+Case #16:
+3
+3
+3
+3
+3
+3
+b
+3
+3
+1
+Case #17:
+2a42296
+9f6b5a5
+a59fc72
+d48d495
+Case #18:
+3
+3
+3
+3
+7
+3
+3
+3
+3
+3
+1
+Case #19:
+a4a586a
+3232ad5
+9fdffc6
+8d41185
+Case #20:
+8e7
+231
+b72
+197
+Case #21:
+32a42
+9ddcd
+Case #22:
+ace6acceeeecf4
+9419dc411118d6
+Case #23:
+bec622a4862
+518ddddccd5
+Case #24:
+32
+b5
+b6
+31
+b4
+96
+a7
+31
+b4
+b4
+32
+97
+a5
+b4
+Case #25:
+3
+3
+3
+3
+3
+3
+3
+3
+3
+b
+3
+1
+Case #26:
+3
+3
+3
+3
+3
+3
+3
+3
+9
+Case #27:
+7
+3
+3
+3
+1
+Case #28:
+eec52
+1bcc7
+adc61
+9c494
+Case #29:
+be4
+3b6
+133
+231
+bf6
+119
+Case #30:
+d6
+a5
+b6
+11
+Case #31:
+3
+3
+3
+3
+3
+3
+3
+7
+3
+1
+Case #32:
+3
+3
+3
+3
+3
+Case #33:
+8dcccccccc
+Case #34:
+3
+3
+Case #35:
+223
+bf5
+1b4
+ad6
+321
+972
+af5
+3b6
+131
+af4
+3b6
+119
+Case #36:
+b4
+32
+b7
+33
+1b
+a5
+b6
+31
+b4
+96
+23
+b7
+13
+85
+Case #37:
+8622acc7
+8dddf485
+Case #38:
+8eccdc4
+Case #39:
+8622232
+ad73bd5
+3afd722
+31963b7
+18c5959
+Case #40:
+8cdcccccdcccc4
+Case #41:
+8e49c6
+ed4863
+9cccd5
+Case #42:
+2a5a622ae486a43
+b7a5bdd73aedfc7
+19d418c59594185
+Case #43:
+8ccccccccddcc4
+Case #44:
+32a4aced6aceec6
+9ddcd4949585185
+Case #45:
+8ccccccccccccdc
+Case #46:
+8e52a4
+87af72
+cd5195
+Case #47:
+7
+3
+1
+Case #48:
+9c62
+8ed5
+2bc4
+9f42
+8f63
+859d
+Case #49:
+8ccccccccccdccc
+Case #50:
+3
+3
+3
+3
+3
+3
+3
+3
+3
+3
+3
+3
+3
+b
+1
+Case #51:
+8eccccccdccc4
+Case #52:
+8e5
+af4
+132
+afd
+1b6
+a71
+194
+Case #53:
+2b
+b7
+11
+Case #54:
+33
+b5
+b4
+96
+a7
+13
+a7
+11
+Case #55:
+86a5
+2bd4
+9fe6
+8531
+2ad4
+9d62
+8ed5
+8fe6
+a731
+1394
+Case #56:
+9d4
+Case #57:
+ac7223
+b639f7
+119c51
+Case #58:
+3
+3
+3
+3
+3
+3
+7
+3
+3
+1
+Case #59:
+9ccccc
+Case #60:
+ae5
+1b6
+871
+872
+c73
+8f5
+872
+8f5
+8d4
+Case #61:
+3
+3
+3
+7
+1
+Case #62:
+223
+9f7
+a73
+131
+Case #63:
+ccc5
+Case #64:
+bed6acc6
+118dd485
+Case #65:
+3
+3
+3
+3
+3
+3
+3
+3
+3
+3
+3
+3
+3
+Case #66:
+3a4
+bd6
+d41
+Case #67:
+3
+3
+3
+5
+Case #68:
+cccccccccdcccc4
+Case #69:
+8dcccc
+Case #70:
+3
+3
+3
+b
+3
+3
+3
+3
+1
+Case #71:
+38c6
+9ce7
+8c71
+8ed4
+2bc4
+9fe6
+8531
+Case #72:
+878f4
+af632
+119d5
+Case #73:
+8efe7
+85111
+Case #74:
+b5
+b4
+b4
+b4
+32
+33
+97
+87
+a7
+11
+Case #75:
+3
+3
+3
+Case #76:
+869ec4
+8dcfc4
+Case #77:
+9ec4
+adc6
+9c49
+Case #78:
+232a6
+bfd73
+19431
+Case #79:
+3
+3
+3
+Case #80:
+a7
+19
+Case #81:
+b4b6
+9e71
+8594
+Case #82:
+5
+Case #83:
+b5
+b4
+94
+Case #84:
+87222a4
+8ddddd6
+Case #85:
+28ef4
+de5b4
+858d4
+Case #86:
+ccccc5
+Case #87:
+3
+3
+3
+3
+3
+3
+b
+3
+1
+Case #88:
+2aeec7
+b53b69
+941194
+Case #89:
+8cdec6
+8cc785
+Case #90:
+a5
+b4
+b4
+b4
+b4
+b4
+Case #91:
+2b6
+973
+871
+872
+2b5
+9d6
+2a7
+971
+af4
+1b6
+a51
+b42
+963
+ad5
+Case #92:
+3
+3
+3
+3
+3
+Case #93:
+32
+97
+a5
+b4
+b4
+b6
+13
+a5
+bc
+94
+Case #94:
+96
+87
+a5
+96
+87
+a5
+b4
+b4
+96
+Case #95:
+8d
+Case #96:
+87a
+af5
+194
+Case #97:
+ae49e48cfe4
+3bc6bcce5b4
+194958cd494
+Case #98:
+8cdccdccc4
+Case #99:
+3
+3
+3
+3
+3
+Case #100:
+8ccecccdcc4
