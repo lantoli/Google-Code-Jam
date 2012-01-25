@@ -1,0 +1,64 @@
+This is Leo Antoli's solution to challenge in: http://code.google.com/codejam/contest/dashboard?c=32003#s=p3
+
+Solution provided in:
+
+Java
+
+Problem
+
+You have a list of items you need to buy today, and you know the locations (represented as points on a cartesian grid) of a few stores in the area. You also know which of these stores are selling each item on your list, and at what price each store sells it. Given the price of gas, what is the minimum amount you need to spend in order to buy all the items on your shopping list and then drive back home? You start and end the journey at your house, which is located at (0,0).
+
+To make matters interesting, some of the items on your list may be perishable. Whenever you make a purchase that includes one or more perishable items, you cannot drive to another store without first stopping back at your house. Every item on your shopping list is guaranteed to be sold by at least one store, so the trip will always be possible.
+
+Input
+
+The first line of input gives the number of cases, N. N test cases follow. Each case starts with a line formatted as
+
+num_items num_stores price_of_gas
+The next line contains the num_items items on your shopping list. The items will be space separated, and each item will consist of only lowercase letters. If an item is perishable, its name will be followed by a single exclamation point. There will be no duplicate items on your list. The next num_stores lines will each be formatted as
+
+x_pos y_pos item1:price1 item2:price2 ...
+Each of these lines gives the location of one store, along with the items available at that store and their corresponding prices. Only items which are on your shopping list will appear in these lists. Perishable items will not end with exclamation points on these lists. No item will be repeated in a store's list. Each store will offer at least one item for sale. No two stores will be at the same location, and no store will be located at (0,0).
+
+Output
+
+For each test case, output one line containing "Case #x: " followed by the minimum possible cost of the trip, rounded to seven decimal places. Don't forget about price_of_gas, which is the amount of money you must spend per unit distance that you drive.
+
+Limits
+
+1 ≤ N ≤ 100,
+0 ≤ price_of_gas ≤ 1000,
+-1000 ≤ x_pos ≤ 1000,
+-1000 ≤ y_pos ≤ 1000,
+1 ≤ price of each item ≤ 1000.
+
+Small dataset
+
+1 ≤ num_items ≤ 5,
+1 ≤ num_stores ≤ 10.
+
+Large dataset
+
+1 ≤ num_items ≤ 15,
+1 ≤ num_stores ≤ 50.
+
+Sample
+
+
+Input 
+
+2
+1 2 10
+cookies
+0 2 cookies:400
+4 0 cookies:320
+3 3 5
+cookies milk! cereal
+0 2 cookies:360 cereal:110
+4 0 cereal:90 milk:150
+-3 -3 milk:200 cookies:200
+
+Output 
+Case #1: 400.0000000
+Case #2: 519.2920690
+
