@@ -1,3 +1,4 @@
+import static java.lang.Math.max;
 import static java.util.Arrays.deepToString;
 
 import java.io.FileInputStream;
@@ -12,13 +13,13 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-public class MultiThreadTemplate  {
+public class BillBoardMultithread  {
 
-	final static String FILENAME = "multithread";
+	final static String FILENAME = "billboards";
 	final static String FILENAME_IN = FILENAME + ".in";
 	final static String FILENAME_OUT = FILENAME + ".out";
 
-	final static int THREADS = 1; // use 1 to solve them sequentially
+	final static int THREADS = 4; // use 1 to solve them sequentially
 
 	// VM arguments: -Xms2048M -Xmx2048M
 
@@ -32,14 +33,16 @@ public class MultiThreadTemplate  {
 
 			// TODO: Read input
 
-			example1 = in.nextInt();
-			example2 = in.nextInt();
+			width = in.nextInt();
+			height = in.nextInt();
+			words = in.nextLine().trim().split(" ");
 		}
 
 
 		// TODO: Define input variables
 
-		int example1, example2;
+		int width, height;
+		String[] words;
 
 
 		@Override
@@ -48,7 +51,33 @@ public class MultiThreadTemplate  {
 
 			// TODO: Solve problem here and return result as a string
 
-			String res = String.format("Case #%d: %d", testId, example1+example2);
+			int maxLength = 0;
+			for (String word : words) {
+				maxLength = max(maxLength,word.length());
+			}
+			int size = width / maxLength;
+			assert size <= 1000;
+			loop:
+				for (; size > 0; --size) {
+					int colsLeft = width / size;
+					int rowsLeft = height / size;
+					int pos = 0;
+					while (rowsLeft > 0 && pos < words.length) {
+						if (words[pos].length() <= colsLeft) {
+							colsLeft -= words[pos].length() + 1;
+							pos++;
+						} else {
+							rowsLeft--;
+							colsLeft = width / size;
+						}
+					}
+					if (pos == words.length) {
+						break loop;
+					}
+				}
+
+
+			String res = String.format("Case #%d: %d", testId, size);
 
 			System.err.println(String.format("%4d ms %s" , (System.nanoTime() - now) / 1000000, res));
 			return res;
@@ -64,7 +93,6 @@ public class MultiThreadTemplate  {
 	static void debug(Object...os) {
 		System.err.println(deepToString(os));
 	}
-	;
 
 	public static void main(String[] args) throws FileNotFoundException, InterruptedException {
 		long now = System.nanoTime();
