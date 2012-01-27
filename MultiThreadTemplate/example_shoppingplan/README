@@ -1,0 +1,117 @@
+MultiThreadTemplate is a Java class by Leo Antoli to easily allow solving algorithmic problems concurrently.
+
+This is an example of use for Shopping Plan problem: http://code.google.com/codejam/contest/dashboard?c=32003#s=p3
+
+
+These are some examples of execution times in a MacBook Quad Core i7:
+
+
+ShoppingPlan (single thread):
+
+Case #1: 8288.9967217
+Case #2: 415582.4135714
+Case #3: 8288.9967217
+Case #4: 415582.4135714
+Case #5: 8288.9967217
+Case #6: 415582.4135714
+Case #7: 8288.9967217
+Case #8: 415582.4135714
+Case #9: 8288.9967217
+Case #10: 415582.4135714
+TOTAL: 37070 ms
+
+
+MultiThreadShoppingPlan (1 THREAD):
+
+TESTS: 10
+ 423 ms Case #1: 8288.9967217
+7798 ms Case #2: 415582.4135714
+ 251 ms Case #3: 8288.9967217
+7144 ms Case #4: 415582.4135714
+ 280 ms Case #5: 8288.9967217
+7079 ms Case #6: 415582.4135714
+ 270 ms Case #7: 8288.9967217
+7426 ms Case #8: 415582.4135714
+ 252 ms Case #9: 8288.9967217
+7218 ms Case #10: 415582.4135714
+TOTAL: 38224 ms
+
+
+MultiThreadShoppingPlan (2 THREADS):
+
+TESTS: 10
+ 480 ms Case #1: 8288.9967217
+ 397 ms Case #3: 8288.9967217
+8422 ms Case #4: 415582.4135714
+ 294 ms Case #5: 8288.9967217
+8325 ms Case #6: 415582.4135714
+ 303 ms Case #7: 8288.9967217
+23206 ms Case #2: 415582.4135714
+ 439 ms Case #9: 8288.9967217
+9055 ms Case #8: 415582.4135714
+8236 ms Case #10: 415582.4135714
+TOTAL: 31960 ms
+
+
+MultiThreadShoppingPlan (3 THREADS):
+
+TESTS: 10
+ 542 ms Case #3: 8288.9967217
+ 558 ms Case #1: 8288.9967217
+ 491 ms Case #5: 8288.9967217
+12304 ms Case #4: 415582.4135714
+11896 ms Case #6: 415582.4135714
+ 460 ms Case #7: 8288.9967217
+ 457 ms Case #9: 8288.9967217
+14550 ms Case #2: 415582.4135714
+10031 ms Case #8: 415582.4135714
+9710 ms Case #10: 415582.4135714
+TOTAL: 23554 ms
+
+
+MultiThreadShoppingPlan (4 THREADS):
+
+TESTS: 10
+ 643 ms Case #3: 8288.9967217
+ 683 ms Case #1: 8288.9967217
+ 649 ms Case #5: 8288.9967217
+ 591 ms Case #7: 8288.9967217
+16738 ms Case #4: 415582.4135714
+17033 ms Case #2: 415582.4135714
+ 722 ms Case #9: 8288.9967217
+17067 ms Case #6: 415582.4135714
+16664 ms Case #8: 415582.4135714
+8156 ms Case #10: 415582.4135714
+TOTAL: 25269 ms
+
+
+MultiThreadShoppingPlan (6 THREADS):
+
+TESTS: 10
+ 850 ms Case #5: 8288.9967217
+ 876 ms Case #1: 8288.9967217
+ 910 ms Case #3: 8288.9967217
+ 788 ms Case #7: 8288.9967217
+ 828 ms Case #9: 8288.9967217
+18374 ms Case #10: 415582.4135714
+19233 ms Case #8: 415582.4135714
+20991 ms Case #2: 415582.4135714
+21035 ms Case #4: 415582.4135714
+21115 ms Case #6: 415582.4135714
+TOTAL: 21194 ms
+
+
+MultiThreadShoppingPlan (10 THREADS):
+
+TESTS: 10
+1196 ms Case #9: 8288.9967217
+1304 ms Case #3: 8288.9967217
+1343 ms Case #5: 8288.9967217
+1358 ms Case #1: 8288.9967217
+1362 ms Case #7: 8288.9967217
+21390 ms Case #8: 415582.4135714
+21427 ms Case #6: 415582.4135714
+21508 ms Case #4: 415582.4135714
+21774 ms Case #10: 415582.4135714
+21926 ms Case #2: 415582.4135714
+TOTAL: 22063 ms
