@@ -24,6 +24,9 @@ public class MultiThreadTemplate  {
 
 	static class Solver implements Callable<String> {
 
+		// PROBLEM RESOLUTION STARTS HERE -----------------------------------------------------------
+		// ------------------------------------------------------------------------------------------
+
 		Solver(int testId) {
 			this.testId = testId;
 
@@ -51,6 +54,8 @@ public class MultiThreadTemplate  {
 			return res;
 		}
 
+		// PROBLEM RESOLUTION FINISHES HERE ---------------------------------------------------------
+		// ------------------------------------------------------------------------------------------
 
 		int testId;
 	}
