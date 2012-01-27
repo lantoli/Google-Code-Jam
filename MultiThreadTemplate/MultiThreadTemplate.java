@@ -27,7 +27,7 @@ public class MultiThreadTemplate  {
 		Solver(int testId) {
 			this.testId = testId;
 
-			// TODO: Reads input
+			// TODO: Read input
 
 			example1 = in.nextInt();
 			example2 = in.nextInt();
@@ -50,8 +50,6 @@ public class MultiThreadTemplate  {
 			System.err.println(String.format("%4d ms %s" , (System.nanoTime() - now) / 1000000, res));
 			return res;
 		}
-
-
 
 
 		int testId;
