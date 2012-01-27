@@ -79,8 +79,8 @@ public class MultiThreadTemplate  {
 			try {
 				System.out.println(solutions.get(i).get());
 			} catch (Exception e) {
-				System.out.println(String.format("Case #d: EXCEPTION", solvers.get(i).testId));
-				System.err.println(String.format("Case #d: EXCEPTION", solvers.get(i).testId));
+				System.out.println(String.format("Case #%d: EXCEPTION !!!!!", solvers.get(i).testId));
+				System.err.println(String.format("Case #%d: EXCEPTION !!!!!", solvers.get(i).testId));
 				e.printStackTrace(System.err);
 			}
 		}
