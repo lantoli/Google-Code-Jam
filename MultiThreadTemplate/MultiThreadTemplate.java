@@ -20,7 +20,7 @@ public class MultiThreadTemplate  {
 
 	final static int THREADS = 1; // use 1 to solve them sequentially
 
-	// VM arguments: -Xms2048M -Xmx2048M
+	// VM arguments: -Xms4096M -Xmx4096M
 
 	static class Solver implements Callable<String> {
 
@@ -57,7 +57,7 @@ public class MultiThreadTemplate  {
 		// PROBLEM SOLUTION ENDS HERE -------------------------------------------------------------
 		// ----------------------------------------------------------------------------------------
 
-		int testId;
+		final int testId;
 	}
 
 
