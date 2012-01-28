@@ -1,0 +1,44 @@
+This is Leo Antoli's solution to challenge in: https://www.facebook.com/hackercup/problems.php?pid=191596157517194&round=225705397509134
+
+It is Facebook Hacker Cup 2012, online 1 round, problem 1
+
+Solution provided in:
+
+Java
+
+Problem
+
+You are racing on a 2D lattice grid starting from the origin (0,0) towards a goal (M,N) where M and N are positive integers such that 0 < M <= N. There is a checkpoint that's neither on the origin nor on the goal with coordinates (m,n) such that 0 <= m <= M and 0 <= n <= N. You must clear the checkpoint before you reach the goal. The shortest path takes T = M + N steps.
+At each point, you can move to the four immediate neighbors at a fixed speed, but since you don't want to lose the race, you are only going to take either a step to the right or to the top.
+
+Even though there are many ways to reach the goal while clearing the checkpoint, the race is completely pointless since it is relatively easy to figure out the shortest route. To make the race more interesting, we change the rules. Instead of racing to the same goal (M,N), the racers get to pick a goal (x,y) and place the checkpoint to their liking so that there are exactly S distinct shortest paths.
+
+For example, given S = 4, consider the following two goal and checkpoint configurations
+Placing the checkpoint at (1, 3) and the goal at (2,3). There are 4 ways to get from the origin to the checkpoint depending on when you move to the right. Once you are at the checkpoint, there is only one way to reach the goal with minimal number of steps. This gives a total of 4 distinct shortest paths, and takes T = 2 + 3 = 5 steps. However, you can do better.
+Placing the checkpoint at (1, 1) and the goal at (2,2). There are two ways to get from the origin to the checkpoint depending on whether you move to the right first or later. Similarly, there are two ways to get to the goal, which gives a total of 4 distinct shortest paths. This time, you only need T = 2 + 2 = 4 steps.
+As a Hacker Cup racer, you want to figure out how to place the checkpoint and the goal so that you cannot possibly lose. Given S, find the smallest possible T, over all possible checkpoint and goal configurations, such that there are exactly S distinct shortest paths clearing the checkpoint.
+
+Input
+As input for the race you will receive a text file containing an integer R, the number of races you will participate in. This will be followed by R lines, each describing a race by a single number S. Lines are separated using Unix-style ("\n") line endings. 
+
+Output
+Your submission should contain the smallest possible length of the shortest path, T for each corresponding race, one per line and in order. 
+
+Constraints
+5 <= R <= 20
+1 <= S <= 10000000
+
+Example input
+5
+4
+5
+12
+14
+1
+
+Example output
+Case #1: 4
+Case #2: 6
+Case #3: 6
+Case #4: 9
+Case #5: 2

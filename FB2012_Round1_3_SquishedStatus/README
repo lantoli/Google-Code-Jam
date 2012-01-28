@@ -1,0 +1,46 @@
+This is Leo Antoli's solution to challenge in: https://www.facebook.com/hackercup/problems.php?pid=348968131789235&round=225705397509134
+
+It is Facebook Hacker Cup 2012, online 1 round, problem 3
+
+Solution provided in:
+
+Java
+
+Problem
+
+Some engineers got tired of dealing with all the different ways of encoding status messages, so they decided to invent their own. In their new scheme, an encoded status message consists of a sequence of integers representing the characters in the message, separated by spaces. Each integer is between 1 and M, inclusive. The integers do not have leading zeroes. Unfortunately they decided to compress the encoded status messages by removing all the spaces!
+
+Your task is to figure out how many different encoded status messages a given compressed status message could have originally been. Because this number can be very large, you should return the answer modulo 4207849484 (0xfaceb00c in hex).
+
+For example, if the compressed status message is "12" it might have originally been "1 2", or it might have originally been "12". The compressed status messages are between 1 and 1000 characters long, inclusive. Due to database corruption, a compressed status may contain sequences of digits that could not result from removing the spaces in an encoded status message.
+
+Input
+The input begins with a single integer, N, the number of compressed status messages you must analyze. This will be followed by N compressed status messages, each consisting of an integer M, the highest character code for that database, then the compressed status message, which will be a string of digits each in the range '0' to '9', inclusive. All tokens in the input will be separated by some whitespace.
+
+Output
+For each of the test cases numbered in order from 1 to N, output "Case #i: " followed by a single integer containing the number of different encoded status messages that could be represented by the corresponding compressed sequence modulo 4207849484. If none are possible, output a 0.
+
+Constraints
+5 <= N <= 25
+2 <= M <= 255
+1 <= length of encoded status <= 1000
+
+Example input
+5
+12
+12
+255
+219
+30
+1234321
+2
+101
+70 8675309
+
+Example output
+
+Case #1: 2
+Case #2: 4
+Case #3: 6
+Case #4: 0
+Case #5: 2
