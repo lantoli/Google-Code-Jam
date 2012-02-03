@@ -39,7 +39,7 @@ public class MultiThreadTemplate  {
 
 		// TODO: Define input variables
 
-		int example1, example2;
+		final int example1, example2;
 
 
 		@Override
