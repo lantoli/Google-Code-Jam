@@ -1,0 +1,73 @@
+This is Leo Antoli's solution to challenge in: https://www.facebook.com/hackercup/problems.php?pid=277701708952729&round=222291111185610
+
+It is Facebook Hacker Cup 2012, online round 3, problem 3
+
+Solution provided in:
+
+Java
+
+Problem
+
+It's time to clean up your friends list after friending too many people on Facebook over the winter. The set of your friends' user ids is F = {x0, x1, ..., xn-1}. Each friend from F is on zero or more friend lists that you use to organize your friends. There are M friend lists, c0, c1, ..., cm-1. You can unfriend (remove from F) some of your friends, but because you want to stay in touch with people, you can only unfriend one person from each friend list. You may also choose not to unfriend anyone from friend list. Any friend that isn't on a friend list cannot be unfriended.
+
+Your goal is to find the maximum possible distance between the two friends whose user ids are the closest after you are done unfriending people. The distance between user id x and user id y is defined as abs(x-y).
+
+Input
+The first line contains a positive integer T, the number of test cases. T test cases follow.
+
+The first line of each test case contains the number of friends N, and number of friend lists M, separated by a space. The second line contains x0 and integer parameters a, b, and p, separated by spaces. You must use these to generate the remaining numbers x1, …, xn-1 according to this formula:
+
+xi = (xi-1 * a + b) mod p
+The next M lines of each test case define the friend lists for that test case. Each line consists of the following integers, separated by spaces: size, y0, a, b. The size is the number of friends in the friend list. y0 is the index in F of the first friend in the list. You must generate the remaining friends in the friend list y1, …, yn-1 according to the following formula:
+yi = (yi-1 * a + b) mod n
+If a friend list contains more than one of a given index, consider it to only contain that index once.
+Constraints
+1 ≤ T ≤ 20
+2 ≤ n ≤ 50 000
+0 ≤ m ≤ 1 500
+0 ≤ sum of sizes of all friend lists ≤ 1 000 000
+Numbers used in generators:
+0 < a, p < 230
+0 ≤ b < 230
+
+Output
+For each of the test cases numbered in order from 1 to T, output "Case #", followed by the case number, followed by ": ", followed by the maximum possible distance between the two closest user ids that you are still friends with for that case.
+
+Example input
+5
+9 2
+48071530 715583197 479567108 1050406
+2 6 743132951 85415827
+2 3 376850600 968665455
+
+11 3
+787260730 352556659 382266931 1057730
+2 9 734333632 693274928
+4 2 109921566 4305285
+2 6 677574083 984173544
+
+10 3
+395307869 893188066 853669149 1056195
+4 7 225271526 816658669
+4 0 131869161 339696459
+4 7 709635520 662395613
+
+12 3
+796525811 590453825 261103276 1050505
+3 9 594759110 714784928
+3 5 431449006 621243801
+3 10 638845242 279357772
+
+12 2
+609821186 802201942 33450613 1048819
+4 3 988115593 116841583
+4 0 327812052 590896542
+
+Example output
+
+Case #1: 7392
+Case #2: 5130
+Case #3: 15318
+Case #4: 63175
+Case #5: 5814
+
