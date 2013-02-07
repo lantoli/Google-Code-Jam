@@ -1,0 +1,16 @@
+5
+2
+abcd
+c?ab
+3
+ab?c?c
+ac?c??
+3
+ab?c?c
+aabbdd
+2
+aa
+bb
+2
+abcd
+cdab
