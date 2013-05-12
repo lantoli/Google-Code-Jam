@@ -1,0 +1,227 @@
+#!/bin/bash
+
+# Tuenti Contest tools
+# @author: Guillermo Pérez -bisho-
+#
+# Please, do not play with this, might cause issues in your
+# contest evaluation: we log everything, we are measuring times
+# between asking for input and submiting output.
+
+DEPENDENCIES="curl"
+CONTEST_DOMAIN="https://contest.tuenti.net"
+VERSION="2013-1.0"
+PROGNAME=$( basename $0 )
+
+RC=~/.tuenti_contest_tools
+test -f $RC && source $RC
+
+function assert_environment() {
+	local STATUS=0
+	local DEPENDENCY
+	local DEPENDENCY_PATH
+
+	for DEPENDENCY in $DEPENDENCIES; do
+		DEPENDENCY_PATH=$(which $DEPENDENCY)
+		if [ ! -x "$DEPENDENCY_PATH" ]; then
+			(
+			if [ $STATUS -eq 0 ]; then
+				echo
+				echo "ERROR: Unable to find some needed tools."
+				echo "Please install them before continue."
+				echo
+			fi
+			echo "- Install $DEPENDENCY"
+			) >&2
+			STATUS=1
+		fi
+	done
+	if [ $STATUS != 0 ]; then
+		exit $STATUS
+	fi
+}
+function assert_args() {
+	if [ $# -lt 2 ]; then
+		(
+		echo
+		echo "Usage:"
+		echo "   $PROGNAME CHALLENGE_TOKEN PATH_TO_EXECUTABLE [ARGS]"
+		echo
+		echo "Parameters:"
+		echo "   - CHALLENGE_TOKEN     The token given in the challenge page, unique per"
+		echo "                         challenge and per user"
+		echo "   - PATH_TO_EXECUTABLE  The path to your program (must be executable)"
+		echo "   - ARGS                If your program needs args to run, pass them here"
+		echo
+		echo "Notes:"
+		echo "   - If it's a scripting language, try to execute:"
+		echo "       $PROGNAME TOKEN SRC_PATH <interpreter> <path/to/source>"
+		echo "     For example, for PHP:"
+		echo "       $PROGNAME TOKEN SRC_PATH php path/to/source.php"
+		echo
+		) >&2
+		exit 65
+	fi
+}
+function request() {
+	raw_request 1 "$@"
+	return $?
+}
+function raw_request() {
+	local FAIL_ON_ERROR=$1
+	shift
+	local RESOURCE=$1
+	shift
+	local CURL="curl -s";
+	if [ $FAIL_ON_ERROR == 1 ]; then
+		CURL="curl -s -f";
+	fi
+	RESPONSE=$($CURL $CONTEST_DOMAIN/$RESOURCE -d "token=$TOKEN" -d "version=$VERSION" "$@")
+	return $?
+}
+function assert_is_executable() {
+	local PROGRAM=$1
+	local PROGRAM_PATH=$( which "$PROGRAM")
+	if [ ! -x "$PROGRAM" ] && [ -z "$PROGRAM_PATH" ] || [ ! -x "$PROGRAM_PATH" ]; then
+		(
+		echo
+		echo "ERROR: Unable to execute file."
+		echo "The file '$PROGRAM' does not exist or its not executable."
+		echo
+		echo "- Check that the file exists, the path is correct or it's in the PATH"
+		echo "- Check that the file has executable permissions"
+		echo "- If it's a scripting language, try to execute:"
+		echo "     $PROGNAME TOKEN SRC_PATH <interpreter> <path/to/source>"
+		echo "  For example, for PHP:"
+		echo "     $PROGNAME TOKEN SRC_PATH php path/to/source.php"
+		echo
+		) >&2
+		exit 1
+	fi 
+}
+function assert_challenge() {
+	local CHALLENGE
+	local STATUS
+
+	request Solver/checkTuentiToolsVersion
+	STATUS=$?
+	if [ $STATUS != 0 ]; then
+		(
+		echo
+		echo "ERROR: You have outdated tuenti tools"
+		echo
+		echo "- Please update your tuenti tools version to the latest one"
+		echo "  available at $CONTEST_DOMAIN/Info/tools"
+		) >&2
+		exit 1
+	fi
+
+	request Solver/challengeInfo
+	STATUS=$?
+	CHALLENGE=$RESPONSE
+	if [ $STATUS != 0 ]; then
+		(
+		echo
+		echo "ERROR: Invalid token"
+		echo
+		echo "- Check if you are using a valid token."
+		echo "- Challenge might be already submited."
+		) >&2
+		exit 1
+	fi
+	echo
+	echo "*** $CHALLENGE ***"
+	echo
+}
+function get_input() {
+	request Solver/getTestInput
+	STATUS=$?
+	if [ $STATUS -ne 0 ]; then
+		(
+		echo
+		echo "ERROR: Unable to get input"
+		echo
+		echo "We got an error from server. Ensure you are using a valid token."
+		) >&2
+		exit $STATUS
+	fi
+	echo "$RESPONSE"
+}
+function execute_program() {
+	local STATUS=1
+	local INPUT="$1"
+	shift
+	local PROGRAM="$1"
+	shift
+
+	echo -n "* Executing \`$PROGRAM"
+	local PROGARG
+	for PROGARG in "$@"; do
+		echo -n " '$PROGARG'";
+	done
+	echo -n "´... "
+	export OUTPUT=$(echo "$INPUT" | $PROGRAM "$@")
+	STATUS=$?
+
+	echo "Done"
+
+	if [ $STATUS -ne 0 ]; then
+		(
+		echo
+		echo "WARNING: Wops, your program didn't seem to end nicely!"
+		echo "Returned status: $STATUS"
+		) >&2
+	fi
+
+	return $STATUS
+}
+function validate_output() {
+	local INPUT="$1"
+	local RESULT="$2"
+
+	echo "* Validating output..."
+	request Solver/assertTestOutput -d "output=$RESULT"
+	if [ $? -ne 0 ]; then
+		(
+		echo
+		echo "ERROR! Houston we have a problem!"
+		echo "--- INPUT ---------------------------------";
+		echo "$INPUT"
+		echo "--- OUTPUT CHECK --------------------------";
+		raw_request 0 Solver/assertTestOutput -d "output=$RESULT"
+		echo "$RESPONSE"
+		echo
+		echo "* Test FAILED! :("
+		echo
+		) >&2
+		exit $STATUS
+	else
+		echo "OK! Your program gives the right answer!";
+		echo "--- INPUT ---------------------------------";
+		echo "$INPUT"
+		echo "--- OUTPUT CHECK --------------------------";
+		echo "$RESPONSE"
+		echo
+		echo "* Test PASSED! :)"
+		echo
+	fi
+
+	return $STATUS
+}
+function test_challenge() {
+	export TOKEN=$1
+	shift
+	local PROGRAM=$1
+	shift
+
+	assert_is_executable "$PROGRAM"
+	assert_challenge
+	local INPUT=$(get_input)
+	execute_program "$INPUT" "$PROGRAM" "$@"
+	validate_output "$INPUT" "$OUTPUT"
+	exit $?
+}
+
+assert_environment
+assert_args "$@"
+test_challenge "$@"
+

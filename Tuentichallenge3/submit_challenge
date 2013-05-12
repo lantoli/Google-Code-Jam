@@ -1,0 +1,305 @@
+#!/bin/bash
+
+# Tuenti Contest tools
+# @author: Guillermo Pérez -bisho-
+#
+# Please, do not play with this, might cause issues in your
+# contest evaluation: we log everything, we are measuring times
+# between asking for input and submiting output.
+
+DEPENDENCIES="sed openssl file du curl"
+CONTEST_DOMAIN="https://contest.tuenti.net"
+VERSION="2013-1.0"
+PROGNAME=$( basename $0 )
+
+RC=~/.tuenti_contest_tools
+test -f $RC && source $RC
+
+function assert_environment() {
+	local STATUS=0
+
+	local DEPENDENCY
+	local DEPENDENCY_PATH
+	for DEPENDENCY in $DEPENDENCIES; do
+		DEPENDENCY_PATH=$(which $DEPENDENCY)
+		if [ ! -x "$DEPENDENCY_PATH" ]; then
+			(
+			if [ $STATUS -eq 0 ]; then
+				echo
+				echo "ERROR: Unable to find some needed tools."
+				echo "Please install them before continue."
+				echo
+			fi
+			echo "- Install $DEPENDENCY"
+			) >&2
+			STATUS=1
+		fi
+	done
+	if [ $STATUS != 0 ]; then
+		exit $STATUS
+	fi
+}
+function assert_args() {
+	if [ $# -lt 3 ]; then
+		(
+		echo
+		echo "Usage:"
+		echo "   $PROGNAME CHALLENGE_TOKEN PATH_TO_SOURCE_PKG PATH_TO_EXECUTABLE [ARGS]"
+		echo
+		echo "Parameters:"
+		echo "   - CHALLENGE_TOKEN     The token given in the challenge page, unique per"
+		echo "                         challenge and per user"
+		echo "   - PATH_TO_SOURCE_PKG  The path to a package containing the source code"
+		echo "                         Please use standard compression: zip or tar+gzip,"
+		echo "                         no funky 7zip, rar or similar..."
+		echo "   - PATH_TO_EXECUTABLE  The path to your program (must be executable)"
+		echo "   - ARGS                If your program needs args to run, pass them here"
+		echo
+		echo "Notes:"
+		echo "   - If it's a scripting language, try to execute:"
+		echo "       $PROGNAME TOKEN SRC_PATH <interpreter> <path/to/source>"
+		echo "     For example, for PHP:"
+		echo "       $PROGNAME TOKEN SRC_PATH php path/to/source.php"
+		echo
+		) >&2
+		exit 65
+	fi
+}
+function request() {
+	local RESOURCE=$1
+	shift
+	RESPONSE=$(curl -s -f $CONTEST_DOMAIN/$RESOURCE -d "token=$TOKEN" -d "version=$VERSION" "$@")
+	return $?
+}
+function assert_is_executable() {
+	local PROGRAM=$1
+	local PROGRAM_PATH=$( which "$PROGRAM")
+	if [ ! -x "$PROGRAM" ] && [ -z "$PROGRAM_PATH" ] || [ ! -x "$PROGRAM_PATH" ]; then
+		(
+		echo
+		echo "ERROR: Unable to execute file."
+		echo "The file '$PROGRAM' does not exist or its not executable."
+		echo
+		echo "- Check that the file exists, the path is correct or it's in the PATH"
+		echo "- Check that the file has executable permissions"
+		echo "- If it's a scripting language, try to execute:"
+		echo "     $PROGNAME TOKEN SRC_PATH <interpreter> <path/to/source>"
+		echo "  For example, for PHP:"
+		echo "     $PROGNAME TOKEN SRC_PATH php path/to/source.php"
+		echo
+		) >&2
+		exit 1
+	fi 
+}
+function assert_source_exists() {
+	local SOURCE=$1
+	if [ ! -r $SOURCE ]; then
+		(
+		echo
+		echo "ERROR: Invalid source package"
+		echo "The specified source package '$SOURCE' does not exist or its not readable."
+		echo
+		echo "- Check that the file exists and the path is correct"
+		) >&2
+		exit 1
+	fi
+}
+function confirm_submit() {
+	local SOURCE=$1
+	shift
+	local PROGRAM=$1
+	shift
+	local CHALLENGE
+	local STATUS
+
+        request Solver/checkTuentiToolsVersion
+        STATUS=$?
+        if [ $STATUS != 0 ]; then
+                (
+                echo
+                echo "ERROR: You have outdated tuenti tools"
+                echo
+                echo "- Please update your tuenti tools version to the latest one"
+                echo "  available at $CONTEST_DOMAIN/Info/tools"
+                ) >&2
+                exit 1
+        fi
+
+	request Solver/challengeInfo
+	STATUS=$?
+	CHALLENGE=$RESPONSE
+	if [ $STATUS != 0 ]; then
+		(
+		echo
+		echo "ERROR: Invalid token"
+		echo
+		echo "- Check if you are using a valid token."
+		echo "- Challenge might be already submited."
+		) >&2
+		exit 1
+	fi
+	echo
+	echo "*** $CHALLENGE ***"
+	echo
+	echo "* File to submit as solution:"
+	echo "  $(du -h $SOURCE)"
+	echo "  ($(file $SOURCE | sed -e 's/^[^:]*: //'))"
+	echo
+	echo "* Command to execute:"
+	echo -n "  $PROGRAM"
+	local PROGARG
+	for PROGARG in "$@"; do
+		echo -n " '$PROGARG'";
+	done
+	echo
+	echo
+	echo "NOTE:"
+	echo "  - Remember you are only able to submit the output of the submit phase"
+	echo "    just once. The input might be more complex than the test phase, with"
+	echo "    bigger inputs, corner cases..."
+	echo "  - We will be also measuring time ellapsed since your request the final"
+	echo "    phase input and your program returns the response as a metric for"
+	echo "    efficiency."
+	echo "  - SO ENSURE YOUR SOLUTION IS FULLY READY FOR THE FINAL PHASE!"
+	echo
+	echo "Are your ready to continue?"
+
+	local CONTINUE=0
+	local KEY
+	until [ $CONTINUE -eq 1 ]; do
+		echo -n "[y/n] "
+		read KEY
+		case $KEY in
+		[yY])
+			CONTINUE=1
+			;;
+		[nN])
+			echo "Aborted!";
+			exit 0
+		esac
+	done
+}
+function send_source() {
+	echo
+	echo -n "* Uploading source '$SOURCE'... "
+
+	local BASE64SOURCE=$(openssl enc -base64 -in "$SOURCE")
+	local MD5SOURCE=$(openssl dgst -md5 "$SOURCE" | sed -e 's/.*= //')
+
+	request "Solver/submitCode" -d "name=$SOURCE" --data-urlencode "source=$BASE64SOURCE"
+	if [ $? -ne 0 ]; then
+		(
+		echo
+		echo "ERROR: Source upload failed!"
+		echo
+		echo "- Check if you already passed the test."
+		echo "- Source must be less than 250KB in size."
+		echo "- Source must be >50 bytes (to avoid uploading empty things by error)."
+		) >&2
+		exit 1
+	fi
+
+	if [ "$MD5SOURCE " != "$RESPONSE " ]; then
+		(
+		echo
+		echo "ERROR: Source upload failed!"
+		echo
+		echo "Signature of original/received files does not match:"
+		echo "Local: $MD5SOURCE"
+		echo "Server: $RESPONSE"
+		) >&2
+		exit 1
+	fi
+
+	echo "Ok"
+}
+function execute_program() {
+	local STATUS=1
+	local PROGRAM=$1
+	shift
+
+	# At the very moment of executing this, we start measuring time, so don't try hacks here :)
+	request Solver/getSubmitInput
+	STATUS=$?
+	local INPUT=$RESPONSE
+	if [ $STATUS -ne 0 ]; then
+		(
+		echo
+		echo "ERROR: Unable to get input"
+		echo
+		echo "We got an error from server. Ensure you are using a valid token."
+		) >&2
+		exit $STATUS
+	fi
+
+	echo
+	echo -n "* Executing \`$PROGRAM"
+	local PROGARG
+	for PROGARG in "$@"; do
+		echo -n " '$PROGARG'";
+	done
+	echo -n "´... "
+
+	export OUTPUT=$(echo "$INPUT" | $PROGRAM "$@" 2>&1)
+	STATUS=$?
+
+	echo "Done"
+
+	if [ $STATUS -ne 0 ]; then
+		(
+		echo
+		echo "WARNING: Wops, your program didn't seem to end nicely!"
+		echo "Returned status: $STATUS"
+		echo "It's too late to fix issues. Next time, try to protect yourself better against corner cases!"
+		)  >&2
+	fi
+
+	return $STATUS
+}
+function send_output() {
+	local RESULT=$1
+	local tries
+	local STATUS=1
+
+	for tries in 1 2 3 4 5; do
+		request Solver/submitOutput -d "output=$RESULT" 
+		STATUS=$?
+		if [ $STATUS == 0 ]; then break; fi
+		sleep 1
+	done
+
+	if [ $STATUS -ne 0 ]; then
+		(
+		echo
+		echo "ERROR: Unable to send your program output!";
+		echo
+		echo "- Try to re-submit it asap, time is counting!";
+		) >&2
+		exit $STATUS
+	fi
+	echo
+	echo "* Submit completed!!!"
+	echo "Now go to the contest page and refresh status to continue!";
+}
+function submit_challenge() {
+	local STATUS
+	export TOKEN=$1
+	shift
+	local SOURCE=$1
+	shift
+	local PROGRAM=$1
+	shift
+
+	assert_is_executable "$PROGRAM"
+	assert_source_exists "$SOURCE"
+	confirm_submit "$SOURCE" "$PROGRAM" "$@"
+	send_source "$SOURCE"
+	execute_program "$PROGRAM" "$@"
+	STATUS=$?
+	send_output "$OUTPUT"
+	exit $STATUS
+}
+
+assert_environment
+assert_args "$@"
+submit_challenge "$@"
