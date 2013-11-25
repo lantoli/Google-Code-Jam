@@ -1,0 +1,67 @@
+This is Leo Antoli's solution to challenge in: https://www.facebook.com/hackercup/problems.php?round=189890111155691
+
+It is Facebook Hacker Cup 2014, round qualif, problem 1
+
+Solution provided in:
+
+Java
+
+Problem
+
+Square Detector20 points
+Download Input File
+You want to write an image detection system that is able to recognize different geometric shapes. In the first version of the system you settled with just being able to detect filled squares on a grid.
+
+You are given a grid of N×N square cells. Each cell is either white or black. Your task is to detect whether all the black cells form a square shape.
+
+Input
+The first line of the input consists of a single number T, the number of test cases.
+
+Each test case starts with a line containing a single integer N. Each of the subsequent N lines contain N characters. Each character is either "." symbolizing a white cell, or "#" symbolizing a black cell. Every test case contains at least one black cell.
+
+Output
+For each test case i numbered from 1 to T, output "Case #i: ", followed by YES or NO depending on whether or not all the black cells form a completely filled square with edges parallel to the grid of cells.
+
+Constraints
+1 ≤ T ≤ 20
+1 ≤ N ≤ 20
+
+Example
+Test cases 1 and 5 represent valid squares. Case 2 has an extra cell that is outside of the square. Case 3 shows a square not filled inside. And case 4 is a rectangle but not a square.
+
+Example input
+5
+4
+..##
+..##
+....
+....
+4
+..##
+..##
+#...
+....
+4
+####
+#..#
+#..#
+####
+5
+#####
+#####
+#####
+#####
+.....
+5
+#####
+#####
+#####
+#####
+#####
+
+Example output
+Case #1: YES
+Case #2: NO
+Case #3: NO
+Case #4: NO
+Case #5: YES
