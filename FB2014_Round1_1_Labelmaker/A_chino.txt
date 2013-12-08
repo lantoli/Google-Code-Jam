@@ -1,0 +1,42 @@
+#include <stdio.h>
+#include <string.h>
+#include <algorithm>
+using namespace std;
+long long N;
+int len;
+char dat[100];
+char go[100], gh;
+
+int main() {
+	freopen("labelmaker.txt", "r", stdin);
+	freopen("labelmaker.out", "w", stdout);
+	int T;
+	scanf("%d", &T);
+	while (T-- > 0) {
+		scanf("%s %lld", dat, &N);
+		len = strlen(dat);
+		sort(dat, dat + len);
+		gh = 0;
+		N--;
+        
+        
+		long long solLen = 1, minus = len;
+		while (N >= minus) {
+			N -= minus;
+			solLen++;
+			if (N / len < minus) break;
+			minus *= len;
+		}
+		for (int i = 0; i < solLen;i++ ) {
+			int p = N % len;
+			go[gh++] = dat[p];
+			N /= len;
+		}
+        
+		static int cs = 1;
+		printf("Case #%d: ", cs++);
+		for (int i = gh - 1; i >= 0; i--) printf("%c", go[i]);
+		printf("\n");
+	}
+	return 0;
+}

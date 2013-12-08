@@ -1,0 +1,41 @@
+#include <stdio.h>
+#include <string.h>
+#include <algorithm>
+using namespace std;
+
+int main() {
+	freopen("coins_game.txt", "r", stdin);
+	freopen("coins_game.out", "w", stdout);
+	int T;
+	scanf("%d", &T);
+	while (T-- > 0) {
+		int N, K, C;
+		scanf("%d %d %d", &N, &K, &C);
+		int A = K / N;
+		int B = K % N;
+		int sol = -1;
+
+		for (int i = 0; i <= N; i++) {
+			sol = C + i;
+			int R = N - i;
+			if (R > 0) {
+				int H = (C-1) / R + 1;
+				if (H * R <= K) break;
+
+				H--;
+				if (H > 0) {
+					if (H * R + (H - 1) * i >= C) break;
+				}
+				H = C / R;
+				if (H > 0) {
+					if (H * R + (H - 1) * i >= C) break;
+				}
+			}
+		}
+		static int cs = 1;
+		printf("Case #%d: ", cs++);
+		printf("%d", sol);
+		printf("\n");
+	}
+	return 0;
+}

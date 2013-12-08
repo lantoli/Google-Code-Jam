@@ -1,0 +1,48 @@
+This is Leo Antoli's solution to challenge in: https://www.facebook.com/hackercup/problems.php?pid=105395349584705&round=1437956993099239
+
+It is Facebook Hacker Cup 2014, round 1, problem 2
+
+Solution provided in:
+
+Java
+
+Problem
+
+Alice and Bob like to play what they call the "Coins Game". In this game Bob starts with K identical coins and N identical jars. A jar can fit any number of coins and Bob has to distribute all the coins in whatever way he wants.
+
+After the coins are distributed Alice takes the jars and shuffles them at random while Bob isn't looking. Alice will move jars around but will not move any coins between the jars. The jars are opaque so after the shuffle Bob doesn't see how many coins are in each.
+
+Now Bob has P moves. In each move he points at one of the jars. If the jar contains any coins Alice takes a single coin from it and hands it to Bob. If the jar is empty Alice tells Bob. Bob remembers his initial distribution and the moves he has made so far.
+
+The goal of the game is to check whether Bob is able to acquire at least C coins after his P moves. If he can to do that he wins the game. After losing the first few games Bob is determined to figure out what's the minimal number of moves P that can guarantee his win. Your job is to help him, that is find the minimal value P for which there exists an initial coins distribution and moves strategy that makes Bob win no matter what order the jars are in.
+
+Input
+The first line of the input consists of a single integer T, the number of test cases. 
+Each test case is a single line with three integers: N K C
+
+Output
+For each test case i numbered from 1 to T, output "Case #i: ", followed by an integer P, the minimal number of moves for which there exists a winning strategy.
+
+Constraints
+1 ≤ T ≤ 20
+1 ≤ N ≤ 1000000
+1 ≤ C ≤ K ≤ 1000000
+Examples
+In the first test case we start with three jars and six coins. Bob needs to get four of them to win. A winning strategy is to put two coins in each jar. Then he can point twice at one jar and twice at another one to always get four coins.
+
+In the second example he can put the five coins in a different jar each. In the worst case he will point at an empty jar three times so he will need five total moves to get two coins. There is no way to guarantee a win with fewer than five moves.
+
+Example input
+5
+3 6 4
+8 5 2
+3 4 4
+1 3 1
+2 10 9
+
+Example output
+Case #1: 4
+Case #2: 5
+Case #3: 5
+Case #4: 1
+Case #5: 9

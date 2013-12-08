@@ -1,0 +1,54 @@
+This is Leo Antoli's solution to challenge in: https://www.facebook.com/hackercup/problems.php?pid=1420024724897316&round=1437956993099239
+
+It is Facebook Hacker Cup 2014, round 1, problem 4
+
+Solution provided in:
+
+Java
+
+Problem
+
+It is a truth universally acknowledged that a grandparent in possession of a good fortune must furnish his or her grandchildren with cash on their birthdays. Your usual approach is to give each of your N grandchildren a number of dollars equal to their age, (That means 0 dollars for newborns; it's important that they learn what a rough place the world is from the very start).
+
+One of your younger, and more precocious, grandchildren, Elly, has read online that trying out new things is a good way to prevent Alzheimer's. So, out of concern for your mental well-being (and in the hopes that she might receive more money), she's posed a new distribution scheme. "If any two grandchildren compare the size of their presents, they should find that both presents are divisible by an integer K. They should also find that there is no larger integer that divides the size of both presents," she states.
+
+Well, that seems harmless enough, you think. Of course, each grandchild will still have to receive at least as much money as they would have under the old scheme, to avoid any family drama. As you're getting on in years, your mathematical prowess isn't what it used to be. It would be easier to write a program that computes the additional drain on your pocketbook.
+
+Note that 0 is divisible by all other numbers.
+
+Input
+The first line of the input consists of a single integer T, the number of test cases. 
+Each test case starts with a line with the integers N and K.
+The next line consists of the ages of your grandchildren as N integers A1, A2, ..., AN.
+Output
+For each test case i numbered from 1 to T, output "Case #i: ", followed by the minimum extra amount of money you would have to spend compared to giving everyone money equal to their age.
+
+Constraints
+1 ≤ T ≤ 20
+2 ≤ N ≤ 20
+1 ≤ K ≤ 20
+0 ≤ Ai ≤ 50 
+Examples
+In the first example, you would have to pay 2 to one of them and 3 to the other. The total cost would be 5. Under the old constraints, both grandchildren would get 2, for a total sum of 4. The answer is 5-4 = 1. You can't pay 2 to both, because their gifts would be divisible by 2 as well as 1.
+
+In the second example, a possible solution is to give them 3, 7, 5 and 16 dollars, for a total of 31. Under the old constraints, you would give them a total of 28. The answer is 31-28 = 3.
+
+In the third example, all gifts have to be divisible by 3. A possible solution is 6, 21, 51. This is 6 more than the sum of their ages. Note that 6, 18, 51 are all divisible by 3, but 6 and 18 are both divisible by 6 as well, so that solution is not valid.
+
+Example input · DownloadExample output · Download
+5
+2 1
+2 2
+4 1
+2 7 5 14
+3 3
+5 18 49
+3 1
+1 2 3
+4 2
+0 0 1 2
+Case #1: 1
+Case #2: 3
+Case #3: 6
+Case #4: 0
+Case #5: 3

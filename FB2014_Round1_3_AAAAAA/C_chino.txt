@@ -1,0 +1,78 @@
+#include <stdio.h>
+#include <string.h>
+#include <algorithm>
+
+#define max(a,b) (((a)>(b))?(a):(b))
+using namespace std;
+
+int dy1[500][500];
+int dy2[500][500];
+char data[500][512];
+int n, m;
+
+const int INF = 99999999;
+
+int get1(int x, int y) {
+	if (0 <= x && x < n && 0 <= y && y < m) return dy1[x][y];
+	return -INF;
+}
+int get2(int x, int y) {
+	if (0 <= x && x < n && 0 <= y && y < m) return dy2[x][y];
+	return 0;
+}
+int main() {
+	freopen("aaaaaa.txt", "r", stdin);
+	freopen("aaaaaa.out", "w", stdout);
+	int T;
+	scanf("%d", &T);
+	while (T-- > 0) {
+		scanf("%d %d", &n, &m);
+		for (int i = 0; i < n; i++) {
+			scanf("%s", data[i]);
+		}
+		for (int i = 0; i < n; i++) for (int j = 0; j < m; j++) {
+			dy1[i][j] = dy2[i][j] = -INF;
+		}
+
+		int sol = 0;
+		for (int i = 0; i < n; i++) for (int j = 0; j < m; j++) {
+			if (data[i][j] == '.') {
+				dy1[i][j] = max(get1(i - 1, j), get1(i, j - 1)) + 1;
+				if (i == 0 && j == 0) dy1[i][j] = 1;
+			}
+			sol = max(sol, dy1[i][j]);
+		}
+		for (int i = n-1; i >= 0; i--) for (int j = m-1; j >= 0; j--) {
+			if (data[i][j] == '.') {
+				dy2[i][j] = max(get2(i + 1, j), get2(i, j + 1)) + 1;
+			}
+			if (dy2[i][j] < 0) dy2[i][j] = 1;
+		}
+
+		//left ward
+		for (int i = 1; i < n; i++) {
+			for (int j = 0; j < m; j++) {
+				for (int k = j; k < m; k++) {
+					if (data[i][k] == '#') break;
+					int x = get1(i - 1, k) + get2(i + 1, j) + (k - j + 1);
+					sol = max(sol, x);
+				}
+			}
+		}
+		//up ward
+		for (int i = 1; i < m; i++) {
+			for (int j = 0; j < n; j++) {
+				for (int k = j; k < n; k++) {
+					if (data[k][i] == '#') break;
+					int x = get1(k, i - 1) + get2(j, i + 1) + (k - j + 1);
+					sol = max(sol, x);
+				}
+			}
+		}
+		static int cs = 1;
+		printf("Case #%d: ", cs++);
+		printf("%d", sol);
+		printf("\n");
+	}
+	return 0;
+}
