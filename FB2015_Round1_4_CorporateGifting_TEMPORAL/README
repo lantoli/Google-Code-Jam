@@ -1,0 +1,56 @@
+Facebook Hacker Cup 2015, round, problem 4
+https://www.facebook.com/hackercup/problems.php?pid=759650454070547&round=344496159068801
+
+Problem: Corporate Gifting
+
+The fine people of Corpro Corp. are a festive bunch. Every holiday season, everybody buys a gift for their manager. A cynic might say that the employees are just trying to bribe their way to a better performance review, but if you asked them yourself, they'd say they just wanted to spread cheer.
+
+The fine people of Corpro Corp. are a frugal bunch. When they buy gifts, they cooperate to collectively buy the least expensive gifts that they can. A cynic might say that the employees are cheap, but if you asked them yourself, they'd say it's the thought that counts.
+
+There are N employees working at Corpro Corp., and each of them has a manager, except for the CEO who has no manager (the CEO also buys a gift every year, but she donates it to charity). The employees each have a unique employee ID which is an integer from 1 to N. As you might expect, the CEO has the ID 1.
+
+If there exists a set of two or more employees {p1, ..., pk} such that, for all i < k, pi is the manager of pi+1, then we say that p1 is "responsible for" pk. There are never two employees who are responsible for each other. That would be a silly hierarchy indeed.
+
+There are N kinds of gifts available for purchase, and the ith kind of gift costs i dollars. That is, the prices of the different kinds of gifts are {$1, $2, $3, ... $N}. There are N copies of each gift available for purchase.
+
+The only thing that stops all employees from purchasing gifts that cost $1 is the awkwardness of buying a gift for their manager that's the same as the one their manager is giving away. No employee would ever do such a thing!
+
+For example, in a company with just 2 employees, at least $3 must be spent in total. If employee #1 (the CEO) buys a $1 gift to donate to charity, then employee #2 cannot buy a $1 gift for employee #1 (their manager), but they can buy a $2 gift instead. Note that it would be equally optimal for the CEO to buy a $2 gift, while receiving a $1 gift from her subordinate.
+
+What's the minimum possible total expenditure across the whole company during the gift exchange?
+
+Input
+Input begins with an integer T, the number of corporate hierarchies to consider. Each hierarchy is made up of two lines. The first line contains the integer N. The second line contains N space-separated integers. The ith integer is the employee ID of the manager of employee i, with the exception that the first integer is always 0, denoting that the CEO has no manager.
+
+Output
+For the ith hierarchy, print a line containing "Case #i: " followed by the smallest amount of money the entire company would need to spend.
+
+Constraints
+1 ≤ T ≤ 100 
+1 ≤ N ≤ 200,000 
+NOTE: The input file is about 10-20MB.
+
+Explanation of Sample
+In the first test case, the CEO will spend $2, and the other employees will spend $1.
+
+In the second test case, employees #2 and #3 will spend $2, and the other employees will spend $1.
+
+Example input
+5
+3
+0 1 1
+8
+0 1 1 2 2 3 3 3
+5
+0 1 2 3 4
+9
+0 1 2 3 4 5 5 5 5
+8
+0 1 1 1 1 2 2 2
+ 
+Example output
+Case #1: 4
+Case #2: 10
+Case #3: 7
+Case #4: 12
+Case #5: 11
