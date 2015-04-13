@@ -33,17 +33,14 @@ public class Dijkstra {
 
 			// TODO: Read input
 
-			int L = in.nextInt();
-			int X = in.nextInt();
+			L = in.nextInt();
+			X = in.nextLong();
 			in.nextLine();
 			String line = in.nextLine();
-			ch = new int[L * X];
+			ch = new int[L];
 			for (int i = 0; i < line.length(); i++) {
 				char elm = line.charAt(i);
-				int val = elm == 'i' ? 2 : elm == 'j' ? 3 : 4;
-				for (int j = 0; j < X; j++) {
-					ch[i + L * j] = val;
-				}
+				ch[i] = elm == 'i' ? 2 : elm == 'j' ? 3 : 4;
 			}
 
 		}
@@ -52,15 +49,20 @@ public class Dijkstra {
 
 		final int[] ch;
 
+		final int L;
+		final long X;
+
 		@Override
 		public String call() throws Exception {
 			long now = System.nanoTime();
 
 			// TODO: Solve problem here and return result as a string
 
+			long size = L * X;
+
 			int calc = 1;
-			for (int i = 0; i < ch.length; i++) {
-				calc = mult(calc, ch[i]);
+			for (long i = 0; i < size; i++) {
+				calc = mult(calc, ch[(int) (i % L)]);
 			}
 
 			boolean found = calc == -1;
@@ -69,18 +71,18 @@ public class Dijkstra {
 				found = false;
 
 				int ii = 1;
-				loop: for (int posi = 0; posi < ch.length; posi++) {
-					ii = mult(ii, ch[posi]);
+				loop: for (long posi = 0; posi < size; posi++) {
+					ii = mult(ii, ch[(int) (posi % L)]);
 					if (ii == 2) {
 
 						int jj = 1;
-						for (int posj = posi + 1; posj < ch.length; posj++) {
-							jj = mult(jj, ch[posj]);
+						for (long posj = posi + 1; posj < size; posj++) {
+							jj = mult(jj, ch[(int) (posj % L)]);
 							if (jj == 3) {
 
 								int kk = 1;
-								for (int posk = posj + 1; posk < ch.length; posk++) {
-									kk = mult(kk, ch[posk]);
+								for (long posk = posj + 1; posk < size; posk++) {
+									kk = mult(kk, ch[(int) (posk % L)]);
 								}
 								if (kk == 4) {
 									found = true;
@@ -98,18 +100,16 @@ public class Dijkstra {
 			return res;
 		}
 
-		// PROBLEM SOLUTION ENDS HERE -------------------------------------------------------------
-		// ----------------------------------------------------------------------------------------
-
 		int[][] table = { { 1, 2, 3, 4 }, { 2, -1, 4, -3 }, { 3, -4, -1, 2 }, { 4, 3, -2, -1 } };
 
 		private int mult(int row, int col) {
 			boolean negate = Integer.signum(row) != Integer.signum(col);
-
 			int next = table[Math.abs(row) - 1][Math.abs(col) - 1];
-
 			return negate ? -next : next;
 		}
+
+		// PROBLEM SOLUTION ENDS HERE -------------------------------------------------------------
+		// ----------------------------------------------------------------------------------------
 
 		final int testId;
 	}
