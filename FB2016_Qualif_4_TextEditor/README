@@ -1,0 +1,76 @@
+Facebook Hacker Cup 2016, qualification round, problem 4
+https://www.facebook.com/hackercup/problem/1525154397757404/
+
+Text Editor
+
+You have a list of N distinct words, consisting of only lowercase letters. You'd like to print any K words from this list, one per page, in any order.
+
+You will accomplish this using a very basic text editor. It supports 3 types of operations: typing a letter, deleting the previous letter, and printing the current document. Note that it does not allow the cursor to be moved! This means that the first operation may only add a letter to the end of the document, and the second may only delete the last letter (if any). Due to issues with memory leakage, you also need to remember to leave the document completely empty after you've printed your K words!
+
+What's the minimum number of operations required to get the job done?
+
+As an example, let's say that you want to print 3 of the following 5 words:
+
+a
+hair
+box
+awesome
+hail
+One optimal sequence of 15 operations is as follows:
+
+- type 'h', 'a', 'i', and 'r' (document = 'hair')
+- print
+- backspace (document = 'hai')
+- type 'l' (document = 'hail')
+- print
+- backspace 4 times (document = empty)
+- type 'a' (document = 'a')
+- print
+- backspace (document = empty)
+Input
+Input begins with an integer T, the number of sets of words you want to print. For each set, there is first a line containing the space-separated integers N and K. The next N lines contain the set of words, one per line.
+
+Output
+For the ith set of words, print a line containing "Case #i: " followed by the minimum number of operations required to print K of the words and then leave the document empty.
+
+Constraints
+1 ≤ T ≤ 100 
+1 ≤ K ≤ N ≤ 300 
+The total length of all N words in each set will be at most 100,000 characters.
+
+Example input
+5
+3 3
+x
+y
+z
+2 1
+loooong
+tiny
+4 3
+fff
+fffff
+ff
+ffff
+5 3
+a
+hair
+box
+awesome
+hail
+8 6
+fox
+of
+xfox
+foo
+foxxx
+off
+foff
+foox
+
+Example output
+Case #1: 9
+Case #2: 9
+Case #3: 11
+Case #4: 15
+Case #5: 26
